@@ -38,7 +38,20 @@ switch ($accion) {
 
 		$vendido = $producto->vendido($id, $stock);
 		$idActualizado = $producto->actualizar($nombreProducto, $referencia, $precio, $peso, $categoria, $disponibleTotal, $id);
-		header('Location: ../vista/producto/productoform.php?id=' . $idActualizado . '&state=actualizado');
+		header('Location: ../vista/producto/productoform.php?id=' . $idActualizado . '&state=vendido');
+		break;
+
+	case 'Editar':
+		$id = $_POST['id'];
+		$nombreProducto = $_POST['nombre_producto'];
+		$referencia = $_POST['referencia'];
+		$precio = $_POST['precio'];
+		$peso = $_POST['peso'];
+		$categoria = $_POST['categoria'];
+		$stock = $_POST['stock'];
+
+		$idActualizado = $producto->actualizar($nombreProducto, $referencia, $precio, $peso, $categoria, $stock, $id);
+		header('Location: ../vista/producto/productoform.php?id=' . $idActualizado . '&state=actualizado&editar=true');
 		break;
 
 	case 'eliminar':

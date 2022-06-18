@@ -45,7 +45,7 @@ $masStock = $producto->masStock();
 					<th>Categoria</th>
 					<th>Cantidad disponible</th>
 					<th>Fecha creación</th>
-					<th colspan="2"></th>
+					<th colspan="3"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,6 +60,7 @@ $masStock = $producto->masStock();
 						<td><?php echo $value->stock; ?></td>
 						<td><?php echo $value->fecha_creacion; ?></td>
 						<td><a href="productoform.php?id=<?php echo $value->id; ?>" class="btn btn-warning">Vender</a></td>
+						<td><a href="productoform.php?id=<?php echo $value->id; ?>&editar=true" class="btn btn-info">Editar</a></td>
 						<td><a href="../../controlador/ProductoControler.php?id=<?php echo $value->id; ?>&accion=eliminar" class="btn btn-danger">Eliminar</a></td>
 					</tr>
 				<?php } ?>

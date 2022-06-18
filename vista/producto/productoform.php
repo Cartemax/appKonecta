@@ -12,10 +12,14 @@ $buscarProducto->fecha_creacion = "";
 
 $disabled = "";
 if (isset($_GET['id'])) {
-    $accion = 'Vender';
     $producto = new ProductoModel();
     $buscarProducto = $producto->buscar($_GET['id']);
-    $disabled = "readonly";
+    if (isset($_GET['editar'])) {
+        $accion = 'Editar';
+    } else {
+        $accion = 'Vender';
+        $disabled = "readonly";
+    }
 } else {
     $accion = 'Nuevo';
 }
@@ -73,19 +77,23 @@ if (isset($_GET['id'])) {
                 <?php } ?>
                 <div class="col-md-4 form-group">
                     <label>Cantidad</label>
-                    <input type="number" name="stock" id="stock" class="form-control" value="">
+                    <input type="number" name="stock" id="stock" class="form-control" value="<?php echo $accion == "Editar" ? $buscarProducto->stock : "" ?>">
                 </div>
             </div>
             <div class="col-md-12 form-group" style="margin-top: 20px;">
                 <button class="btn btn-success form-control"><?php echo $accion ?></button>
             </div>
-            <?php if (isset($_GET['state']) && $_GET['state'] == "actualizado") { ?>
+            <?php if (isset($_GET['state']) && $_GET['state'] == "vendido") { ?>
                 <div class="alert alert-success" role="alert">
                     Vendido correctamente
                 </div>
             <?php } elseif (isset($_GET['state']) && $_GET['state'] == "error") { ?>
                 <div class="alert alert-danger" role="alert">
                     La cantidad solicitada supera a la disponible
+                </div>
+            <?php } elseif (isset($_GET['state']) && $_GET['state'] == "actualizado") { ?>
+                <div class="alert alert-success" role="alert">
+                    Actualizado correctamente
                 </div>
             <?php } ?>
     </div>
